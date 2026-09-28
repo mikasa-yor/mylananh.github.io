@@ -65,6 +65,19 @@
     transition: transform .15s ease, background .15s ease;
   }
   #shuffle:hover{ background: var(--pink-dark); transform: translateY(-1px); }
+  #shuffle-poem{
+    display:block;
+    margin: 16px auto 0;
+    background: var(--gold);
+    color:#fff;
+    border:none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size:14px;
+    cursor:pointer;
+    transition: transform .15s ease, background .15s ease;
+  }
+  #shuffle-poem:hover{ background: #e08c3e; transform: translateY(-1px); }
   .poem{
     line-height: 2;
     font-size: 18px;
@@ -139,6 +152,8 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  .photo.romantic4{ background: linear-gradient(135deg, #667eea, #764ba2); }
+  .photo.funny4{ background: linear-gradient(135deg, #ffecd2, #fcb69f); color:#2b3a55; }
   footer{
     text-align:center;
     font-size: 13px;
@@ -164,14 +179,8 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem-text"></div>
+    <button id="shuffle-poem">Đổi bài thơ khác 🔄</button>
   </section>
 
   <section class="card">
@@ -188,6 +197,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <li>Anh hứa sẽ già đi cùng em, tóc bạc, chân chậm nhưng tay vẫn nắm nhau.</li>
       <li>Anh hứa sẽ luôn coi em là ưu tiên, không phải vì nghĩa vụ, mà vì anh muốn vậy.</li>
       <li>Anh hứa yêu em không chỉ hôm nay, mà là mãi mãi — forever and always.</li>
+      <li>Anh hứa sẽ luôn lắng nghe em, kể cả khi anh chẳng hiểu gì về chuyện em đang kể.</li>
+      <li>Anh hứa sẽ vẫn nắm tay em qua đường, dù tụi mình đã đi con đường đó cả ngàn lần.</li>
+      <li>Anh hứa sẽ luôn là bến đỗ bình yên nhất của em, ở bất kỳ đâu tụi mình sống.</li>
     </ul>
   </section>
 
@@ -200,6 +212,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
       <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
       <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <div class="photo romantic4">🌃<span class="cap">Đêm tụi mình ngồi ngắm sao mà quên cả lạnh</span></div>
+      <div class="photo funny4">🥴<span class="cap">Mặt em lúc thua trò chơi và không chịu nhận thua</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
@@ -220,7 +234,47 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Anh không cần một ngày hoàn hảo, chỉ cần một ngày có em trong đó là đủ đẹp rồi.",
+    "Yêu em không phải là một lựa chọn anh cân nhắc mỗi sáng — nó là điều hiển nhiên nhất trên đời.",
+    "Em là bình yên giữa những ồn ào, là lý do anh luôn muốn về nhà thật sớm.",
+    "Thức dậy cạnh em, anh thấy mình là người may mắn nhất trong tất cả những người may mắn."
+  ];
+
+  const poems = [
+    {
+      text: `Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+      sign: "— anh viết riêng cho em"
+    },
+    {
+      text: `Em là nắng sớm bên hiên,
+Là ly cà phê ấm giữa miền sương mai.
+Bao nhiêu ngày tháng miệt mài,
+Có em, mệt mấy cũng thành nhẹ tênh.
+Đời anh chẳng cần gập ghềnh,
+Chỉ cần có vợ ngồi bên mỗi ngày.
+Dù mai xa cách vòng tay,
+Tim anh vẫn ở nơi này — bên em.`,
+      sign: "— thơ tặng vợ yêu, sáng nào cũng thật"
+    },
+    {
+      text: `Gặp em là một chữ duyên,
+Yêu em là cả một miền trời thương.
+Từ nay chung một con đường,
+Vui buồn có bạn, gió sương chẳng sờn.
+Tay em anh nắm chẳng buông,
+Đi qua giông bão vẫn còn có nhau.
+Mai này tóc điểm sương màu,
+Tình mình vẫn vẹn như câu ban đầu.`,
+      sign: "— anh, người sẽ già đi cùng em"
+    }
   ];
 
   const anecdotes = [
@@ -228,7 +282,10 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần tụi mình cãi nhau ai đọc bản đồ giỏi hơn, xong cả hai cùng đi lạc y chang nhau.",
+    "Em cười muốn ngất khi thấy anh cố hát karaoke bài mà anh không thuộc lời.",
+    "Lần trời mưa bất chợt, hai đứa chạy trú dưới mái hiên và cười suốt vì ướt hết cả người."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -245,6 +302,21 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
   showMessage();
+
+  let lastPoemIndex = -1;
+  function showPoem(){
+    lastPoemIndex = pickRandom(poems, lastPoemIndex);
+    const poem = poems[lastPoemIndex];
+    const el = document.getElementById('poem-text');
+    el.textContent = poem.text;
+    const sig = document.createElement('span');
+    sig.className = 'signature';
+    sig.textContent = poem.sign;
+    el.appendChild(sig);
+  }
+
+  document.getElementById('shuffle-poem').addEventListener('click', showPoem);
+  showPoem();
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
