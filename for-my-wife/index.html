@@ -139,6 +139,8 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  img.photo{ width:100%; height:auto; object-fit:cover; padding:0; }
+  .photo .cap{ text-shadow: 0 1px 3px rgba(0,0,0,.25); }
   footer{
     text-align:center;
     font-size: 13px;
@@ -163,21 +165,14 @@
   </section>
 
   <section class="card">
-    <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <h2>📜 Thơ sáng nay cho em</h2>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
     <h2>😂 Những kỷ niệm vui của tụi mình</h2>
     <ul class="anecdotes" id="anecdotes"></ul>
-    <p class="edit-note">✏️ Đây là chỗ để anh thêm những kỷ niệm thật của tụi mình — sửa trong file <code>for-my-wife/index.html</code>, mảng <code>anecdotes</code> nhé.</p>
+    <p class="edit-note">✏️ Đây là chỗ để anh thêm những kỷ niệm thật của tụi mình — sửa trong file <code>for-my-wife/index.html</code>, mảng <code>anecdotes</code> (mỗi ngày hiện 3 chuyện) nhé.</p>
   </section>
 
   <section class="card">
@@ -193,15 +188,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 
   <section class="card">
     <h2>📸 Ảnh của tụi mình</h2>
-    <div class="gallery">
-      <div class="photo romantic1">🌇<span class="cap">Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn</span></div>
-      <div class="photo funny1">🍜<span class="cap">Lần anh làm cháy nồi phở đầu tiên</span></div>
-      <div class="photo romantic2">💑<span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
-      <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
-      <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
-      <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+    <div class="gallery" id="gallery">
     </div>
-    <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
+    <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: chép ảnh vào <code>for-my-wife/images/</code> đặt tên <code>1.jpg</code> … <code>6.jpg</code> — trang sẽ tự dùng ảnh thật thay cho biểu tượng.</p>
   </section>
 
   <footer>
@@ -220,7 +209,54 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, vợ yêu! Báo cáo: nhớ em 100%, pin trái tim vừa sạc đầy nhờ nghĩ đến em.",
+    "Hôm nay dù có deadline hay kẹt xe, chỉ cần nhớ là tối nay được về nhà với em, anh thấy đời đẹp hẳn.",
+    "Em có biết không, anh yêu cả lúc em cằn nhằn chuyện anh để tất ở đâu đó. Vì đó là em.",
+    "Một ngày mới, một lần nữa anh may mắn vì được là chồng của em. Cười lên nào, nắng đang chờ em đấy!",
+    "Anh không hoàn hảo, nhưng anh hoàn toàn của em. Chúc em một ngày thật nhẹ nhàng nhé.",
+    "Gửi em một cái ôm thật chặt và một nụ hôn ngọt hơn cả ly trà sữa em thích. Yêu em nhiều lắm!",
+    "Nếu yêu em là một cuộc thi, anh đã đạt giải nhất từ lâu — và anh vẫn đang tập luyện mỗi ngày.",
+    "Mỗi sáng anh đều cảm ơn số phận vì đã cho anh gặp em. Hôm nay cũng vậy, và ngày mai cũng vậy."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em cười nắng sớm cũng tan,
+Hoa nghiêng cánh mỏng, chim vàng hót vang.
+Anh đi qua hết đời sang,
+Chỉ mong một mái nhà an có mình.
+Bao nhiêu gió bão, lênh đênh,
+Có em là bến bình yên của lòng.
+Mai kia dù có long đong,
+Anh xin giữ trọn tấm lòng thương em.`,
+`Cà phê đắng, sáng chưa êm,
+Nghĩ đến nụ cười em thêm ngọt ngào.
+Anh không thơ giỏi làm sao,
+Chỉ xin viết mãi chữ "yêu" cho em.
+Ngày qua rồi lại đêm đêm,
+Mỗi giờ mỗi phút anh xem em là
+Mặt trời bé nhỏ của nhà,
+Của anh, của cả tháng ba, tháng mười.`,
+`Yêu em không nói nhiều lời,
+Chỉ xin nắm chặt tay người đi chung.
+Dù cho trời có nắng, mưa,
+Anh làm chiếc ô che chưa từng rời.
+Mai này tóc bạc da nhăn,
+Anh vẫn gọi tiếng "vợ ơi" thật gần.`,
+`Trăng khuya không sáng bằng em,
+Sao trời chẳng ấm bằng đêm em cười.
+Anh xin hứa một lời thôi:
+Thương em trọn kiếp, trọn đời, không phai.
+Dù mai ngày tháng phôi phai,
+Trái tim anh vẫn gọi hoài tên em.`
   ];
 
   const anecdotes = [
@@ -228,8 +264,22 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Em nói 'năm phút nữa em dậy' — và năm phút đó kéo dài đúng ba mươi lăm phút. Anh vẫn đợi.",
+    "Cả hai đứa cãi nhau nên ăn gì tối nay mất một tiếng, rồi cuối cùng ăn mì gói. Vẫn vui nhất."
   ];
+
+  const photos = [
+    { cls: 'romantic1', emoji: '🌇', cap: 'Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn' },
+    { cls: 'funny1',    emoji: '🍜', cap: 'Lần anh làm cháy nồi phở đầu tiên' },
+    { cls: 'romantic2', emoji: '💑', cap: 'Tấm hình đôi lúc nào cũng thích' },
+    { cls: 'funny2',    emoji: '😂', cap: 'Mặt em lúc bị anh hù' },
+    { cls: 'romantic3', emoji: '☕', cap: 'Sáng nào cũng muốn uống cà phê cùng em' },
+    { cls: 'funny3',    emoji: '🐶', cap: 'Cả hai đứa bị con cún nhà hàng xóm bắt nạt' }
+  ];
+
+  // Same message for the whole day (local time), a new one tomorrow.
+  const dayNumber = Math.floor(new Date().setHours(0,0,0,0) / 86400000);
 
   function pickRandom(arr, excludeIndex){
     let i;
@@ -237,17 +287,48 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[lastIndex];
+
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNumber % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
+
+  const gallery = document.getElementById('gallery');
+  photos.forEach((p, i) => {
+    const img = new Image();
+    img.className = 'photo';
+    img.alt = p.cap;
+    img.title = p.cap;
+    img.onload = () => {
+      const fig = document.createElement('figure');
+      fig.style.cssText = 'margin:0;text-align:center;font-size:12px;';
+      fig.append(img, Object.assign(document.createElement('figcaption'), { textContent: p.cap }));
+      tile.replaceWith(fig);
+    };
+    const tile = document.createElement('div');
+    tile.className = 'photo ' + p.cls;
+    tile.textContent = p.emoji;
+    const cap = document.createElement('span');
+    cap.className = 'cap';
+    cap.textContent = p.cap;
+    tile.appendChild(cap);
+    gallery.appendChild(tile);
+    img.src = 'images/' + (i + 1) + '.jpg';
+  });
 
   const list = document.getElementById('anecdotes');
-  anecdotes.forEach(text => {
+  // Show 3 anecdotes per day, rotating.
+  Array.from({ length: 3 }, (_, k) => anecdotes[(dayNumber + k) % anecdotes.length]).forEach(text => {
     const li = document.createElement('li');
     li.textContent = text;
     list.appendChild(li);
