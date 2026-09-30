@@ -220,7 +220,13 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Hôm nay trời có thể mưa hay nắng, nhưng chỉ cần em cười là trong lòng anh luôn có cầu vồng.",
+    "Báo thức đánh thức anh dậy, nhưng chính em mới là lý do anh muốn bước ra khỏi giường mỗi sáng.",
+    "Anh không hứa cuộc đời sẽ toàn hoa hồng, nhưng anh hứa sẽ luôn nắm tay em đi qua cả những đoạn gai.",
+    "Em ơi, dậy đi, anh nhớ em rồi — dù em còn nằm ngay cạnh anh đó. 😘",
+    "Cảm ơn em vì đã chịu đựng tiếng ngáy của anh, và vẫn nói yêu anh mỗi sáng. Đó mới là tình yêu thật sự!",
+    "Ngày hôm nay hãy nhớ: em xinh đẹp, em tuyệt vời, và có một người đang yêu em đến ngớ ngẩn."
   ];
 
   const anecdotes = [
@@ -228,7 +234,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Anh nói 'năm phút nữa là xong' — và em đã học được rằng 'năm phút' của anh nghĩa là nửa tiếng.",
+    "Mỗi lần em hỏi 'ăn gì cũng được' rồi lại chê hết mọi món anh đề xuất — anh vẫn yêu em hết mực."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,9 +245,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
+  // Mỗi ngày một lời chúc khác nhau (theo ngày trong năm); nút bấm để xem thêm lời khác.
+  const now = new Date();
+  const dayNumber = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(now.getFullYear(), 0, 0)) / 86400000);
   let lastIndex = -1;
+  let first = true;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (first) { lastIndex = (dayNumber + now.getFullYear()) % messages.length; first = false; }
+    else { lastIndex = pickRandom(messages, lastIndex); }
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
