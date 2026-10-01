@@ -220,7 +220,12 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Báo cáo buổi sáng: trái tim anh vẫn đập, và vẫn chỉ đập vì em. Chúc vợ yêu một ngày thật rực rỡ.",
+    "Anh đã thử đếm xem có bao nhiêu lý do để yêu em, đếm tới nửa đêm thì ngủ quên — mai đếm tiếp nhé.",
+    "Cà phê thì đắng, báo thức thì ghét, chỉ có em là ngọt ngào nhất buổi sáng của anh.",
+    "Hôm nay anh yêu em nhiều hơn hôm qua một chút xíu — và ngày mai sẽ lại nhiều hơn nữa. Hứa đó!",
+    "Em ơi, nếu em là Wi-Fi thì anh sẵn sàng ngồi gần em cả ngày để không bao giờ mất kết nối."
   ];
 
   const anecdotes = [
@@ -228,7 +233,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Anh hứa dậy sớm nấu bữa sáng cho em, kết quả là cả nhà thơm mùi... trứng cháy. Em vẫn ăn và khen ngon.",
+    "Mỗi lần tụi mình cãi nhau vì chuyện nhỏ xíu, năm phút sau lại cười vì không nhớ nổi cãi chuyện gì."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,9 +244,13 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Mỗi ngày một lời chúc khác nhau (theo ngày trong năm), bấm nút để xem lời khác
+  const dayNumber = Math.floor(new Date().setHours(0,0,0,0) / 86400000);
+  let lastIndex = dayNumber % messages.length;
+  let firstShow = true;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (firstShow) { firstShow = false; }
+    else { lastIndex = pickRandom(messages, lastIndex); }
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
