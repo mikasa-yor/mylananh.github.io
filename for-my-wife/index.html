@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -193,15 +186,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 
   <section class="card">
     <h2>📸 Ảnh của tụi mình</h2>
-    <div class="gallery">
-      <div class="photo romantic1">🌇<span class="cap">Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn</span></div>
-      <div class="photo funny1">🍜<span class="cap">Lần anh làm cháy nồi phở đầu tiên</span></div>
-      <div class="photo romantic2">💑<span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
-      <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
-      <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
-      <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
-    </div>
-    <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
+    <div class="gallery" id="gallery"></div>
+    <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mảng <code>photos</code> trong file này để dùng <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
 
   <footer>
@@ -212,6 +198,7 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 </div>
 
 <script>
+  // Mỗi ngày một lời nhắn, một bài thơ, một kỷ niệm khác nhau (đổi theo ngày trong năm).
   const messages = [
     "Mỗi sáng thức dậy, điều đầu tiên anh nghĩ đến là em. Cảm ơn vì đã chọn anh, mỗi ngày.",
     "Em là lý do những buổi sáng bình thường trở nên đặc biệt. Anh yêu em, hôm nay và mãi mãi.",
@@ -220,7 +207,64 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Hôm nay trời có thể nắng hay mưa, nhưng với anh, chỉ cần có em là trời luôn trong xanh.",
+    "Anh không giỏi nói lời hoa mỹ, nhưng anh chắc chắn một điều: anh thương em nhiều hơn mọi thứ anh biết nói.",
+    "Chúc vợ yêu một ngày thật nhẹ nhàng. Nếu có gì không nhẹ, cứ nhắn anh — anh gánh cùng em.",
+    "Em là bài thơ anh đọc hoài không chán, là bản nhạc anh nghe mãi không thôi.",
+    "Dậy đi vợ ơi, cả thế giới đang chờ nụ cười của em — và anh là người chờ đầu tiên.",
+    "Trong tất cả những lựa chọn của đời anh, chọn em là lựa chọn đúng nhất, không cần nghĩ lại.",
+    "Cảm ơn em vì đã chịu đựng cái tật xấu của anh. Anh hứa sửa… từ từ thôi nhé, 😄.",
+    "Mỗi nếp nhăn nơi khóe mắt sau này, anh muốn đó là dấu vết của những lần mình cười cùng nhau.",
+    "Em không cần hoàn hảo, vì em đã là hoàn hảo nhất đối với anh rồi.",
+    "Sáng nay anh chỉ muốn nói: em vất vả rồi, và anh luôn tự hào về em.",
+    "Nhà không phải là một nơi chốn. Nhà là nơi có em.",
+    "Anh yêu em như cách anh yêu giấc ngủ nướng cuối tuần — không bao giờ muốn dừng lại. 💤",
+    "Một ngày mới, một cơ hội mới để anh yêu em nhiều hơn hôm qua một chút xíu.",
+    "Dù có đi hết thế giới, anh vẫn muốn quay về nơi có em.",
+    "Em cười là anh vui, em vui là anh hạnh phúc. Công thức đơn giản vậy thôi.",
+    "Cảm ơn em đã ở đây, đã thương anh, và đã biến những ngày bình thường thành kỷ niệm.",
+    "Hôm nay nếu em mệt, hãy nhớ có một người luôn đứng sau lưng em, không đi đâu cả.",
+    "Anh nợ em một cái ôm thật chặt — và anh sẽ trả mỗi ngày, cả đời, không tính lãi.",
+    "Em có biết không, anh vẫn còn hồi hộp mỗi lần được em nắm tay, như lần đầu vậy.",
+    "Good morning, beautiful. Hôm nay hãy tự thưởng cho mình thứ gì đó thật ngọt ngào nhé.",
+    "Giữa muôn vàn người, anh may mắn tìm thấy em. Anh sẽ không bao giờ quên điều đó.",
+    "Tình yêu của anh dành cho em không ồn ào, nhưng bền bỉ như nhịp tim — luôn ở đó, từng giây."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là nắng sớm trên vai,
+Là hương cốm mới, là ngày bình yên.
+Anh đi qua những ưu phiền,
+Về đây tìm thấy một miền em thương.
+Dù cho năm tháng vô thường,
+Tim anh vẫn một con đường: về em.`,
+`Có ai thương mãi như anh,
+Sáng nghe tiếng gọi, chiều quanh quẩn nhà.
+Cơm canh đạm bạc cũng là
+Hạnh phúc đong đầy khi ta có mình.
+Nắm tay đi suốt hành trình,
+Anh là người ở bên em trọn đời.`,
+`Nếu mai trời đổ cơn mưa,
+Anh làm chiếc ô che vừa đôi ta.
+Nếu đêm gió lạnh bay qua,
+Anh làm tấm chăn ủ hoà tim em.
+Nếu đời có lúc chông chênh,
+Anh làm bờ vững để em tựa vào.`,
+`Anh yêu em chẳng nói nhiều,
+Chỉ mong mỗi sáng thấy yêu thương đầy.
+Tay trong tay, mắt nhìn say,
+Đời bao nhiêu nẻo, anh đây bên nàng.
+Trăm năm hẹn một đường vàng,
+Em là duyên phận, em là mùa xuân.`
   ];
 
   const anecdotes = [
@@ -228,8 +272,29 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Cái lần anh hứa 'năm phút nữa là xong' — và năm phút đó kéo dài đúng một tiếng rưỡi.",
+    "Em bảo 'đi nhanh thôi' ở siêu thị, rồi tụi mình về với đúng mười món đồ mà hai đứa không ai nhớ là cần.",
+    "Lần anh tự tin chỉ đường, em chỉ nhìn anh một cái là anh biết ngay… mình lại lạc rồi."
   ];
+
+  const photos = [
+    { cls: 'romantic1', icon: '🌇', cap: 'Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn' },
+    { cls: 'funny1',    icon: '🍜', cap: 'Lần anh làm cháy nồi phở đầu tiên' },
+    { cls: 'romantic2', icon: '💑', cap: 'Tấm hình đôi lúc nào cũng thích' },
+    { cls: 'funny2',    icon: '😂', cap: 'Mặt em lúc bị anh hù' },
+    { cls: 'romantic3', icon: '☕', cap: 'Sáng nào cũng muốn uống cà phê cùng em' },
+    { cls: 'funny3',    icon: '🐶', cap: 'Cả hai đứa bị con cún nhà hàng xóm bắt nạt' }
+  ];
+
+  // Chỉ số ngày (giờ địa phương) để mỗi ngày hiện một nội dung khác nhau
+  const now = new Date();
+  const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+
+  let lastIndex = (dayNumber % messages.length + messages.length) % messages.length;
+  function showMessage(){
+    document.getElementById('daily-message').textContent = messages[lastIndex];
+  }
 
   function pickRandom(arr, excludeIndex){
     let i;
@@ -237,23 +302,40 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
-  function showMessage(){
+  document.getElementById('shuffle').addEventListener('click', () => {
     lastIndex = pickRandom(messages, lastIndex);
-    document.getElementById('daily-message').textContent = messages[lastIndex];
-  }
-
-  document.getElementById('shuffle').addEventListener('click', showMessage);
+    showMessage();
+  });
   showMessage();
 
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNumber % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
+
+  // Mỗi ngày hiện 5 kỷ niệm, xoay vòng
   const list = document.getElementById('anecdotes');
-  anecdotes.forEach(text => {
+  for (let k = 0; k < Math.min(5, anecdotes.length); k++){
     const li = document.createElement('li');
-    li.textContent = text;
+    li.textContent = anecdotes[(dayNumber + k) % anecdotes.length];
     list.appendChild(li);
+  }
+
+  const gallery = document.getElementById('gallery');
+  photos.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'photo ' + p.cls;
+    div.textContent = p.icon;
+    const cap = document.createElement('span');
+    cap.className = 'cap';
+    cap.textContent = p.cap;
+    div.appendChild(cap);
+    gallery.appendChild(div);
   });
 
-  document.getElementById('today').textContent = new Date().toLocaleDateString('vi-VN', {
+  document.getElementById('today').textContent = now.toLocaleDateString('vi-VN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 </script>
