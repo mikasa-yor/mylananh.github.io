@@ -164,7 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
+    <div class="poem" id="poem">Sáng nay mở mắt thấy em,
 Lòng anh ấm áp dịu êm nắng vàng.
 Đường đời có lắm mưa ngàn,
 Có em bên cạnh muôn ngàn cũng qua.
@@ -220,7 +220,16 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chúc em buổi sáng thật dịu dàng. Hôm nay có mệt thì nhớ rằng có một người luôn đứng về phía em.",
+    "Anh không giàu có gì, nhưng được thức dậy cạnh em mỗi ngày thì anh thấy mình là người giàu nhất thế giới.",
+    "Em cười là nắng lên. Hôm nay nhớ cười nhiều nhiều nhé, để cả thế giới của anh sáng bừng lên.",
+    "Cà phê thì có thể nguội, nhưng tình yêu anh dành cho em thì luôn nóng hổi như lúc mới gặp.",
+    "Mỗi sáng anh đều biết ơn vì vũ trụ đã sắp xếp để em đi lạc vào cuộc đời anh. Cảm ơn vợ yêu!",
+    "Anh yêu em theo cách khó giải thích nhất: vừa muốn ôm em thật chặt, vừa muốn em ngủ thêm chút nữa.",
+    "Hôm nay anh hứa sẽ nhường em miếng ngon nhất. À… có thể là miếng ngon thứ hai thôi. Đùa đấy, miếng nào cũng của em!",
+    "Có em, wifi yếu cũng chẳng sao, vì tín hiệu mạnh nhất của anh là trái tim đang hướng về em.",
+    "Mỗi ngày bên em là một trang đẹp nhất trong cuốn sách cuộc đời anh. Hôm nay mình viết tiếp nhé?"
   ];
 
   const anecdotes = [
@@ -228,7 +237,10 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Cái cảnh hai đứa cãi nhau xem tối nay ăn gì, cuối cùng… gọi đúng món mà đứa nào cũng nghĩ trong đầu từ đầu.",
+    "Mỗi lần em bảo \"anh đừng mua nữa\" thì anh biết là em đang rất muốn có món đó.",
+    "Em nói \"năm phút nữa là xong\" — và anh đã học được rằng năm phút của em dài bằng một tập phim."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -244,7 +256,30 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+
+  // Mỗi ngày một lời chúc khác nhau (cố định theo ngày), nút "Đổi" để xem lời khác.
+  const dayNumber = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+  lastIndex = dayNumber % messages.length;
+  document.getElementById('daily-message').textContent = messages[lastIndex];
+
+  const poems = [
+    document.getElementById('poem').innerHTML,
+    `Em là nắng sớm đầu ngày,
+Là hương cà phê, là bàn tay ấm lòng.
+Anh đi giữa cõi bụi hồng,
+Chỉ cần có một người không rời xa.
+Mai sau dù tóc phôi pha,
+Anh vẫn đứng đó, đợi là em thôi.
+Trăm năm một kiếp con người,
+Anh xin được ở bên đời của em.<span class="signature">— anh viết riêng cho em</span>`,
+    `Anh yêu em chẳng ồn ào,
+Chỉ là mỗi sáng gọi nhau dậy chờ.
+Thương nhau từ những ngu ngơ,
+Giận nhau chưa quá nửa giờ đã hòa.
+Cảm ơn em đã là nhà,
+Để anh đi mãi cũng ra tới về.<span class="signature">— anh viết riêng cho em</span>`
+  ];
+  document.getElementById('poem').innerHTML = poems[dayNumber % poems.length];
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
