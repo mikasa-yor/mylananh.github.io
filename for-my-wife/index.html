@@ -220,7 +220,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, vợ yêu! Hôm nay em cứ việc xinh đẹp, còn lại để anh lo. 😘",
+    "Anh đã thử đếm xem mình yêu em bao nhiêu, nhưng đếm tới vô cực thì hết số. Nên thôi, yêu em là đủ.",
+    "Báo cáo thời tiết sáng nay: trời nắng, gió nhẹ, và anh vẫn đang yêu em nhiều như hôm qua. ☀️",
+    "Em ơi, dậy đi nào — thế giới cần nụ cười của em, và anh cần nó nhất. 💖",
+    "Cảm ơn em đã chịu đựng những trò đùa dở khóc dở cười của anh. Anh hứa ngày mai còn dở hơn nữa. 😆",
+    "Mỗi nếp nhăn tương lai của chúng ta đều sẽ là một nụ cười đã từng. Anh mong có thật nhiều.",
+    "Dù em có nói \"không sao đâu\", anh vẫn sẽ ôm em thật chặt. Đó là luật của nhà mình."
   ];
 
   const anecdotes = [
@@ -237,9 +244,13 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Mỗi ngày một lời chúc khác nhau (theo ngày trong năm); nút "Đổi" để xem lời khác.
+  const now = new Date();
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  let lastIndex = dayOfYear % messages.length;
+  let first = true;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (first) { first = false; } else { lastIndex = pickRandom(messages, lastIndex); }
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
