@@ -220,7 +220,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chúc em buổi sáng nhẹ nhàng như tiếng cười của em — và nhớ ăn sáng nhé, vì anh cần vợ khỏe để yêu thương cả đời.",
+    "Hôm qua anh yêu em nhiều lắm, hôm nay anh yêu em nhiều hơn một chút. Cứ thế, ngày nào cũng thêm một chút.",
+    "Báo cáo vợ yêu: tim anh vẫn đập đúng một nhịp mỗi khi em bước vào phòng. Không cần bảo hành, anh cam kết trọn đời.",
+    "Em ngủ dậy tóc rối cũng là kiểu tóc đẹp nhất thế giới. Anh nói thật, anh không dám nói dối vợ đâu!",
+    "Cảm ơn em đã chịu đựng những câu đùa nhạt của anh. Anh hứa ngày mai sẽ nhạt hơn nữa, vì anh biết em vẫn cười.",
+    "Mỗi sáng thấy em bên cạnh, anh biết mình là người may mắn nhất trên đời. Chúc em một ngày thật rực rỡ.",
+    "Nhà mình không cần giàu, chỉ cần có em và tiếng cười mỗi sáng. Yêu em nhiều như cà phê yêu buổi sáng vậy đó."
   ];
 
   const anecdotes = [
@@ -228,7 +235,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Cái lần anh hứa 'chỉ xem một tập thôi' rồi cả hai cùng thức đến 3 giờ sáng xem hết cả mùa phim.",
+    "Lần em bảo 'đi đâu cũng được' — rồi mất đúng một tiếng để quyết định ăn gì. Anh vẫn thấy rất đáng yêu."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,9 +246,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
+  // Mỗi ngày một lời chúc khác nhau (theo ngày trong năm); bấm nút để xem lời khác.
+  const now = new Date();
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
   let lastIndex = -1;
+  let firstShow = true;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (firstShow) { lastIndex = dayOfYear % messages.length; firstShow = false; }
+    else { lastIndex = pickRandom(messages, lastIndex); }
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
