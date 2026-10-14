@@ -220,7 +220,36 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Báo cáo buổi sáng: anh vẫn yêu em y như hôm qua, cộng thêm một chút vì hôm nay em lại dễ thương hơn.",
+    "Chúc vợ yêu một ngày thật nhẹ nhàng. Nếu có ai làm em bực, cứ nhắn anh — anh sẽ... đứng về phía em (và mang trà sữa tới).",
+    "Em ơi, báo thức của anh là tiếng em thở bên cạnh — và nó là báo thức đáng yêu nhất thế giới.",
+    "Hôm nay anh yêu em thêm một chút nữa. Ngày mai cũng vậy. Cứ thế mà cộng dồn đến trọn đời."
+  ];
+
+  const poems = [
+    `Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+    `Em là ngọn gió mùa thu,
+Nhẹ nhàng len lỏi vào mùa tim anh.
+Nụ cười em, nắng trong lành,
+Pha thêm vị ngọt cho anh mỗi ngày.
+Dẫu cho năm tháng vơi đầy,
+Tay anh vẫn nắm tay này không buông.
+Anh yêu em, chẳng cần lời hoa mỹ,
+Chỉ cần bên em, mọi nỗi buồn vui.`,
+    `Anh xin làm bến, em làm thuyền,
+Sóng gió bao nhiêu cũng một miền yêu thương.
+Sớm mai em dậy bên giường,
+Là anh đã thấy cả vườn xuân sang.
+Trọn đời anh nguyện mang mang,
+Một câu giản dị: "Em là của anh".`
   ];
 
   const anecdotes = [
@@ -237,9 +266,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  const dayNumber = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+
+  document.querySelector('.poem').firstChild.textContent = poems[dayNumber % poems.length];
+
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (showMessage.shown) lastIndex = pickRandom(messages, lastIndex);
+    showMessage.shown = true;
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
