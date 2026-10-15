@@ -220,7 +220,11 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Sáng nay trời có nắng hay mưa cũng không quan trọng, vì anh đã có em làm mặt trời của riêng mình.",
+    "Anh hứa sẽ không giành chăn với em nữa... à thôi, anh sẽ cố, nhưng anh hứa sẽ luôn yêu em dù chăn có ở đâu.",
+    "Em là người duy nhất khiến anh vừa muốn cười vừa muốn ôm chặt trong cùng một giây. Chúc em một ngày thật vui nhé!",
+    "Cảm ơn em đã chịu đựng những câu đùa nhạt của anh. Đó chính là bằng chứng rõ nhất của tình yêu đích thực."
   ];
 
   const anecdotes = [
@@ -228,7 +232,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần anh nói 'năm phút nữa là xong' — và em đã ngồi đợi đúng... bốn mươi lăm phút."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +242,16 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Mỗi ngày một lời chào khác nhau (theo ngày trong năm); nút bên dưới để đổi ngẫu nhiên.
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  let lastIndex = dayOfYear % messages.length;
+  document.getElementById('daily-message').textContent = messages[lastIndex];
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
