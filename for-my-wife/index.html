@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,7 +213,44 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Báo thức kêu thì anh bực, nhưng nghĩ đến việc sắp được gặp em là anh lại tươi như hoa. Chào buổi sáng, vợ yêu!",
+    "Em là wifi của đời anh: không có em là anh mất kết nối với hạnh phúc ngay lập tức.",
+    "Hôm nay anh hứa sẽ không giành chăn với em... ít nhất là cho đến tối. Yêu em nhiều lắm!",
+    "Trong tất cả những quyết định đúng đắn của đời anh, chọn em là quyết định đúng nhất — và không có đối thủ.",
+    "Mỗi sáng anh đều cảm ơn vũ trụ vì đã sắp xếp cho tụi mình gặp nhau. Vũ trụ giỏi thật đấy!",
+    "Dù em có thức dậy với mái tóc bù xù, với anh em vẫn là người đẹp nhất thế giới.",
+    "Một ngày mới, một lý do mới để anh yêu em nhiều hơn. Mà lý do thì anh có cả kho rồi.",
+    "Cà phê thì nóng, nhưng tình yêu anh dành cho em còn nóng hơn. Dậy đi nào, công chúa của anh!"
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là nắng sớm đầu ngày,
+Là hương cà phê thơm đầy hiên nhà.
+Có em, bão tố cũng qua,
+Không em, mùa xuân cũng là mùa đông.
+Anh xin giữ trọn tấm lòng,
+Yêu em từ thuở đầu hồng đến khi bạc đầu.`,
+`Anh đâu cần cả trời sao,
+Chỉ cần ánh mắt em trao mỗi ngày.
+Tay trong tay, bước thơ ngây,
+Dù đời lắm lúc đắng cay vẫn cười.
+Em ơi, một kiếp làm người,
+Anh xin được gọi tên em: vợ hiền.`,
+`Gió đưa hương sớm qua thềm,
+Nhắn em một chữ "yêu" mềm như mơ.
+Bao năm vẫn thế, vẫn chờ,
+Vẫn say đắm những dại khờ ngày xưa.
+Dù nắng, dù gió, dù mưa,
+Có em là đủ, là vừa lòng anh.`
   ];
 
   const anecdotes = [
@@ -228,7 +258,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Mỗi lần hai đứa cãi nhau chuyện nhỏ xíu, năm phút sau lại quên sạch và cười như chưa có gì xảy ra."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +268,22 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[lastIndex];
+
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNumber % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
