@@ -69,8 +69,7 @@
     line-height: 2;
     font-size: 18px;
     text-align:center;
-    white-space: pre-line;
-    font-family: 'Georgia', serif;
+        font-family: 'Georgia', serif;
     color: var(--text);
   }
   .poem .signature{
@@ -123,15 +122,20 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    font-size: 40px;
     text-align:center;
     color:#fff;
-    padding: 10px;
+    padding: 0;
+    overflow:hidden;
+    position:relative;
   }
+  .photo svg{ position:absolute; inset:0; }
   .photo span.cap{
+    position:absolute; left:0; right:0; bottom:0;
     font-size: 12px;
-    margin-top: 6px;
+    padding: 18px 8px 8px;
     line-height:1.3;
+    color:#fff;
+    background: linear-gradient(transparent, rgba(60,20,40,.65));
   }
   .photo.romantic1{ background: linear-gradient(135deg, #ff9a8b, #ff6a88); }
   .photo.romantic2{ background: linear-gradient(135deg, #f6d365, #fda085); }
@@ -164,14 +168,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -194,12 +191,12 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
   <section class="card">
     <h2>📸 Ảnh của tụi mình</h2>
     <div class="gallery">
-      <div class="photo romantic1">🌇<span class="cap">Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn</span></div>
-      <div class="photo funny1">🍜<span class="cap">Lần anh làm cháy nồi phở đầu tiên</span></div>
-      <div class="photo romantic2">💑<span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
-      <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
-      <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
-      <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <div class="photo romantic1"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="gff9a8b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a8b"/><stop offset="1" stop-color="#ff6a88"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#gff9a8b)"/><circle cx="50" cy="62" r="22" fill="#ffe08a"/><rect y="62" width="100" height="38" fill="#7a3b69"/><circle cx="38" cy="75" r="4" fill="#2b1b3a"/><rect x="36" y="79" width="4" height="12" fill="#2b1b3a"/><circle cx="62" cy="75" r="4" fill="#2b1b3a"/><rect x="60" y="79" width="4" height="12" fill="#2b1b3a"/><path d="M50 30 c-8 -8 -16 2 0 12 c16 -10 8 -20 0 -12z" fill="#fff"/></svg><span class="cap">Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn</span></div>
+      <div class="photo funny1"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="ga1c4fd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a1c4fd"/><stop offset="1" stop-color="#c2e9fb"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#ga1c4fd)"/><ellipse cx="50" cy="66" rx="30" ry="10" fill="#555"/><rect x="20" y="52" width="60" height="14" rx="6" fill="#333"/><path d="M38 44 q-6 -10 2 -18 M52 44 q-6 -10 2 -18 M64 44 q-6 -10 2 -18" stroke="#444" stroke-width="4" fill="none" stroke-linecap="round"/><text x="50" y="90" font-size="9" text-anchor="middle" fill="#2b3a55">phở cháy 🔥</text></svg><span class="cap">Lần anh làm cháy nồi phở đầu tiên</span></div>
+      <div class="photo romantic2"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="gf6d365" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d365"/><stop offset="1" stop-color="#fda085"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#gf6d365)"/><path d="M50 78 C20 55 18 35 34 32 C42 31 48 36 50 42 C52 36 58 31 66 32 C82 35 80 55 50 78Z" fill="#e0507f"/><circle cx="40" cy="48" r="5" fill="#fff" opacity=".6"/></svg><span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
+      <div class="photo funny2"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="g84fab0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84fab0"/><stop offset="1" stop-color="#8fd3f4"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#g84fab0)"/><circle cx="50" cy="50" r="30" fill="#ffe08a"/><circle cx="39" cy="44" r="6" fill="#fff"/><circle cx="61" cy="44" r="6" fill="#fff"/><circle cx="39" cy="45" r="2" fill="#222"/><circle cx="61" cy="45" r="2" fill="#222"/><ellipse cx="50" cy="66" rx="8" ry="10" fill="#7a2230"/></svg><span class="cap">Mặt em lúc bị anh hù</span></div>
+      <div class="photo romantic3"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="gd4a5ff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4a5ff"/><stop offset="1" stop-color="#ff9ecb"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#gd4a5ff)"/><rect x="30" y="45" width="34" height="30" rx="6" fill="#fff"/><path d="M64 52 h8 a6 6 0 0 1 0 14 h-8" stroke="#fff" stroke-width="4" fill="none"/><path d="M40 40 q-4 -8 2 -14 M52 40 q-4 -8 2 -14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M47 58 c-4 -4 -8 1 0 7 c8 -6 4 -11 0 -7z" fill="#e0507f"/></svg><span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
+      <div class="photo funny3"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-hidden="true"><defs><linearGradient id="gfbc2eb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbc2eb"/><stop offset="1" stop-color="#a6c1ee"/></linearGradient></defs><rect width="100" height="100" rx="12" fill="url(#gfbc2eb)"/><ellipse cx="50" cy="58" rx="24" ry="20" fill="#c89b6d"/><ellipse cx="30" cy="40" rx="8" ry="14" fill="#8a5a33"/><ellipse cx="70" cy="40" rx="8" ry="14" fill="#8a5a33"/><circle cx="42" cy="54" r="3" fill="#222"/><circle cx="58" cy="54" r="3" fill="#222"/><ellipse cx="50" cy="63" rx="5" ry="3.5" fill="#222"/><path d="M50 66 q0 8 -6 8 M50 66 q0 8 6 8" stroke="#222" stroke-width="1.5" fill="none"/><ellipse cx="50" cy="76" rx="5" ry="6" fill="#ff6b9d"/></svg><span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
@@ -220,7 +217,36 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, nắng của đời anh. Hôm nay em cứ tỏa sáng, việc lo lắng cứ để anh.",
+    "Anh có thể quên mật khẩu, quên chìa khóa, nhưng không bao giờ quên được cảm giác được yêu em.",
+    "Em cười là cả thế giới của anh sáng lên. Hôm nay nhớ cười nhiều nhiều nhé, vợ yêu.",
+    "Mỗi sáng anh đều biết ơn vì người đầu tiên anh nhìn thấy, người cuối cùng anh nghĩ đến, vẫn là em.",
+    "Dậy đi em, anh pha cà phê rồi nè. Ừ thì... anh sắp pha. Nhưng tình yêu thì pha sẵn từ lâu rồi.",
+    "Tình yêu của anh dành cho em như wifi nhà mình: lúc nào cũng đầy vạch, và anh không bao giờ để mất kết nối."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là buổi sáng trong anh,
+Là hơi ấm giữa mong manh cuộc đời.
+Một câu "yêu dấu" em ơi,
+Anh gom thành nắng gửi nơi tim nàng.
+Dẫu mai tóc có phai tàn,
+Anh còn nắm mãi tay nàng không buông.`,
+`Anh không giỏi nói yêu thương,
+Chỉ xin giữ trọn con đường em đi.
+Sớm mai có nắng có gì,
+Cũng không bằng được nụ cười của em.
+Nhà mình đèn sáng êm đềm,
+Có em là có cả miền bình yên.`
   ];
 
   const anecdotes = [
@@ -228,8 +254,16 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Cái lần hai đứa tranh nhau chăn lúc nửa đêm, sáng ra ai cũng bảo mình không hề giành.",
+    "Em bảo 'không đói', rồi ăn hết nửa đĩa đồ ăn của anh. Anh vẫn thấy đáng yêu hết sức."
   ];
+
+  // Mỗi ngày một lời chào và một bài thơ khác nhau (theo ngày trong năm)
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  document.getElementById('poem').innerHTML =
+    poems[dayNumber % poems.length].replace(/\n/g, '<br>') +
+    '<span class="signature">— anh viết riêng cho em</span>';
 
   function pickRandom(arr, excludeIndex){
     let i;
@@ -237,14 +271,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[lastIndex];
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
