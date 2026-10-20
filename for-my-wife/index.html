@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,7 +213,42 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Báo cáo thời tiết sáng nay: trời nắng 100%, vì có em ở trong đầu anh từ lúc mở mắt.",
+    "Anh đã thử đếm xem mình yêu em bao nhiêu, nhưng đếm tới vô cực thì hết số. Chúc em buổi sáng thật dịu dàng.",
+    "Dậy đi vợ ơi, nhưng nếu em muốn ngủ thêm 5 phút thì anh vẫn yêu em — 5 phút đó anh sẽ ngắm em ngủ.",
+    "Cảm ơn em vì đã chịu đựng tiếng ngáy của anh và vẫn nói \"yêu anh\" mỗi sáng. Em là siêu anh hùng của anh.",
+    "Em là bài hát anh nghe hoài không chán, là nơi anh luôn muốn trở về sau mỗi ngày dài.",
+    "Hôm nay anh chỉ có một mục tiêu: làm em cười ít nhất ba lần. Lần đầu tiên — em đang cười rồi đúng không?",
+    "Ngày mới, nhưng tình yêu thì cũ kỹ theo kiểu tuyệt nhất: vẫn nguyên vẹn, vẫn nồng nàn, vẫn là em.",
+    "Dù thế giới có xoay vòng thế nào, anh vẫn sẽ quay về phía em — như hoa hướng dương hướng về mặt trời."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là ánh nắng ban mai,
+Đánh thức hồn anh sau dài đêm mơ.
+Nụ cười em, giữa bây giờ,
+Làm anh thương nhớ như thơ nhẹ nhàng.
+Cơm canh giản dị bình thường,
+Có em, anh thấy thiên đường ngay đây.
+Mai này dù có đổi thay,
+Tay anh vẫn nắm bàn tay của người.`,
+`Anh không giàu có gì đâu,
+Chỉ giàu một thứ: yêu nhau thật lòng.
+Em là chiếc nón, tấm bông,
+Là hơi ấm giữa mùa đông lạnh về.
+Dẫu cho đường có gập ghềnh,
+Anh đi cạnh em, lối nào cũng xuôi.
+Yêu em, anh nói một lời:
+Kiếp này, kiếp sau, trọn đời vẫn em.`
   ];
 
   const anecdotes = [
@@ -228,7 +256,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Anh hứa sẽ dậy sớm nấu bữa sáng cho em — kết quả: em dậy trước, ngửi mùi khét, và đành pha mì gói cho cả hai.",
+    "Em nói \"anh đi hướng này\", anh không tin, đi hướng kia. Cuối cùng đi vòng lại đúng chỗ em chỉ. Em không nói gì, chỉ cười. Đó là nụ cười đáng sợ nhất đời anh."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,13 +267,26 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Mỗi ngày một lời chào/bài thơ khác nhau (theo số ngày kể từ 1/1/1970).
+  const dayNumber = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
+  function shuffleMessage(){
+    lastIndex = pickRandom(messages, lastIndex);
+    showMessage();
+  }
 
-  document.getElementById('shuffle').addEventListener('click', showMessage);
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNumber % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
+
+  document.getElementById('shuffle').addEventListener('click', shuffleMessage);
   showMessage();
 
   const list = document.getElementById('anecdotes');
