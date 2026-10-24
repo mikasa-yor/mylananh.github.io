@@ -52,7 +52,7 @@
     text-align:center;
     padding: 4px 0;
   }
-  #shuffle{
+  #shuffle, #poem-next{
     display:block;
     margin: 16px auto 0;
     background: var(--pink);
@@ -64,7 +64,7 @@
     cursor:pointer;
     transition: transform .15s ease, background .15s ease;
   }
-  #shuffle:hover{ background: var(--pink-dark); transform: translateY(-1px); }
+  #shuffle:hover, #poem-next:hover{ background: var(--pink-dark); transform: translateY(-1px); }
   .poem{
     line-height: 2;
     font-size: 18px;
@@ -164,14 +164,8 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
+    <button id="poem-next">Đọc bài thơ khác 📜</button>
   </section>
 
   <section class="card">
@@ -220,15 +214,66 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng! Hôm nay anh hứa sẽ không giành chăn của em... ít nhất là đến tối. 😄",
+    "Em không cần hoàn hảo, vì với anh em đã là điều tuyệt vời nhất rồi. Yêu em nhiều lắm.",
+    "Dậy đi nè công chúa, bình minh đang đợi em tỏa sáng còn rực rỡ hơn cả nó.",
+    "Cảm ơn em vì đã cùng anh biến những điều giản dị nhất thành kỷ niệm đẹp nhất.",
+    "Một ngày mới, một lý do mới để anh yêu em nhiều hơn. Hôm qua anh tưởng hết chỗ rồi, vậy mà vẫn còn.",
+    "Anh không giỏi nói lời hoa mỹ, nhưng anh chắc chắn một điều: nhà là nơi có em.",
+    "Mỗi sáng nhìn em ngủ, anh lại thấy mình là người may mắn nhất thế giới (kể cả khi em ngáy nhẹ 😂)."
   ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là ngọn gió đầu mùa,
+Mang theo hương nắng đong đưa trong lòng.
+Anh là chiếc lá bên sông,
+Xin theo em mãi giữa dòng thời gian.
+Dẫu cho năm tháng đa đoan,
+Tay trong tay vẫn bình an mỗi ngày.
+Cà phê sáng, tách trà đầy,
+Có em là cả trời mây ngọt ngào.`,
+`Nụ cười em sáng trăng sao,
+Anh nhìn một chút, nghẹn ngào cả đêm.
+Gọi tên em, nhớ cũng êm,
+Bao nhiêu mệt nhọc cũng im bóng chiều.
+Yêu em chẳng cần nhiều điều,
+Chỉ xin sớm tối thật nhiều bên nhau.`
+  ];
+
+  const dayNumber = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+  let poemIndex = dayNumber % poems.length;
+  const poemEl = document.getElementById('poem');
+  function showPoem(){
+    poemEl.textContent = poems[poemIndex];
+    const sig = document.createElement('span');
+    sig.className = 'signature';
+    sig.textContent = '— anh viết riêng cho em';
+    poemEl.appendChild(sig);
+  }
+  document.getElementById('poem-next').addEventListener('click', () => {
+    poemIndex = (poemIndex + 1) % poems.length;
+    showPoem();
+  });
+  showPoem();
 
   const anecdotes = [
     "Cái lần tụi mình đi lạc đường tìm quán ăn mà cuối cùng lại tìm được món ngon nhất từ trước giờ.",
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần nào hứa 'chỉ ăn một miếng thôi' là lần đó cả hai đứa ăn hết sạch cả đĩa.",
+    "Anh nói 'năm phút nữa là xong' — và em đã học được rằng năm phút của anh dài đúng nửa tiếng.",
+    "Em nói 'em không đói' rồi ăn hết nửa phần của anh. Anh vẫn thấy dễ thương lắm."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +282,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[lastIndex];
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
