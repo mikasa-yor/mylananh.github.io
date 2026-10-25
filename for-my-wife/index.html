@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,7 +213,43 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chúc vợ yêu buổi sáng thật dịu dàng. Hôm nay có mệt thì nhớ rằng phía sau em luôn có anh.",
+    "Anh không giỏi nói lời hoa mỹ, nhưng anh chắc chắn một điều: được thương em là việc đúng đắn nhất đời anh.",
+    "Dậy đi em, nắng lên rồi! À mà thôi, cứ ngủ thêm chút nữa cũng được — anh vẫn đợi em, như mọi sáng.",
+    "Em cười là cả thế giới của anh sáng lên. Hôm nay nhớ cười nhiều nhé, vì anh đang nhìn thấy nụ cười ấy trong tim.",
+    "Một ly cà phê, một lời chúc buổi sáng, và một người vợ tuyệt vời — anh còn cần gì hơn nữa?",
+    "Cảm ơn em vì đã chịu đựng những tật xấu của anh. Anh hứa sẽ sửa… từ từ… nhưng tình yêu thì không bao giờ giảm.",
+    "Mỗi ngày bên em là một trang đẹp trong cuốn sách đời anh. Hôm nay, mình viết tiếp nhé."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Anh yêu em như nắng yêu ngày,
+Như sương yêu lá, như mây yêu trời.
+Dù cho năm tháng đổi dời,
+Tim anh vẫn chỉ một nơi là em.
+Sớm mai thức giấc bên thềm,
+Thấy em là thấy bình yên cuộc đời.`,
+`Em là gió nhẹ đầu thu,
+Thổi qua đời anh bao mùa giá băng.
+Từ khi có bóng em sang,
+Nhà thành tổ ấm, lòng càng thêm xuân.
+Mai này dẫu có phong trần,
+Tay anh vẫn nắm, ân cần cùng em.`,
+`Anh xin làm bến, em làm thuyền,
+Sóng gió bao nhiêu cũng nối duyên một đời.
+Cà phê sáng, nụ cười tươi,
+Là bao hạnh phúc anh nơi em tìm.
+Trăm năm vẫn một niềm tin:
+Có em, anh có cả nghìn ước mơ.`
   ];
 
   const anecdotes = [
@@ -228,7 +257,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Những lần em bảo \"không đói\" rồi lén ăn hết nửa phần của anh — anh biết hết, nhưng anh thích lắm.",
+    "Chuyện hai đứa cãi nhau vì chuyện nhỏ xíu, rồi cùng bật cười vì không nhớ nổi mình cãi gì."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +268,20 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  const dayNumber = Math.floor(new Date().setHours(0,0,0,0) / 86400000);
+
+  document.getElementById('poem').innerHTML =
+    poems[dayNumber % poems.length].replace(/&/g, '&amp;').replace(/</g, '&lt;') +
+    '<span class="signature">— anh viết riêng cho em</span>';
+
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[lastIndex];
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
