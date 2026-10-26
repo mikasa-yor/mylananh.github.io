@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -212,6 +205,41 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 </div>
 
 <script>
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là nắng sớm đầu ngày,
+Là hương cà phê thơm đầy hiên nhà.
+Anh đi qua bão qua sa,
+Về đây có mái ấm là vòng tay.
+Nụ cười em ngọt hơn mây,
+Làm anh quên hết những ngày mỏi mê.
+Dù đời trăm ngả đường về,
+Anh chọn một lối: lối về bên em.`,
+`Gió đưa hương tóc em bay,
+Lòng anh chợt thấy tháng ngày dịu êm.
+Có em, anh hết ưu phiền,
+Cơm canh giản dị cũng thêm ngọt ngào.
+Dù mai nắng gắt mưa rào,
+Tay anh vẫn nắm tay vào tay em.
+Yêu em từ sáng đến đêm,
+Từ đời này đến kiếp thêm ngàn lần.`,
+`Trăng khuya còn ngắm một lần,
+Sao bằng mắt sáng của người anh thương.
+Đời anh bao nẻo đường trường,
+Dừng chân nơi ấy là nhà của anh.
+Em cười, trời bỗng xanh xanh,
+Em buồn, anh nguyện chắn quanh nỗi buồn.
+Tình này chẳng nói thành lời,
+Chỉ xin được ở bên người mãi thôi.`
+  ];
+
   const messages = [
     "Mỗi sáng thức dậy, điều đầu tiên anh nghĩ đến là em. Cảm ơn vì đã chọn anh, mỗi ngày.",
     "Em là lý do những buổi sáng bình thường trở nên đặc biệt. Anh yêu em, hôm nay và mãi mãi.",
@@ -220,7 +248,11 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Báo thức hôm nay reo rồi, nhưng anh vẫn muốn nằm thêm 5 phút... để nhìn em ngủ. Chào buổi sáng, vợ yêu!",
+    "Anh hứa sẽ không giành chăn với em nữa. À thôi, hứa vậy chứ chắc anh không giữ được. Nhưng anh yêu em là thật 100%.",
+    "Hôm nay em cứ làm điều em thích, còn anh sẽ làm điều anh thích nhất: yêu em.",
+    "Mỗi buổi sáng anh đều tự hỏi: sao mình may mắn thế nhỉ? Rồi nhìn sang, thấy em. À, ra vậy."
   ];
 
   const anecdotes = [
@@ -228,8 +260,15 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Mỗi lần hai đứa bảo \"ăn gì cũng được\" rồi đứng giữa phố hai tiếng không quyết định nổi món nào."
   ];
+
+  // poem rotates daily
+  const dayNum = Math.floor(Date.now() / 86400000);
+  document.getElementById('poem').innerHTML =
+    poems[dayNum % poems.length].replace(/</g, '&lt;') +
+    '<span class="signature">— anh viết riêng cho em</span>';
 
   function pickRandom(arr, excludeIndex){
     let i;
