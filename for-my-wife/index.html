@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -199,6 +192,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <div class="photo romantic2">💑<span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
       <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
       <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
+      <div class="photo romantic1">🌹<span class="cap">Hoa không đẹp bằng em đâu</span></div>
+      <div class="photo funny1">🛌<span class="cap">Bằng chứng anh bị giành chăn lúc 3 giờ sáng</span></div>
       <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
@@ -220,7 +215,43 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng vợ yêu! Hôm nay anh hứa sẽ không giành chăn của em… ít nhất là cho đến tối. 😄",
+    "Em là wifi của đời anh: không có em là anh mất kết nối với hạnh phúc. Anh yêu em nhiều lắm.",
+    "Mỗi sáng nhìn em ngủ, anh lại thấy mình là người may mắn nhất thế gian. Dậy đi em, anh pha cà phê rồi nè."
+  ];
+
+  const poems = [
+    `Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+    `Em là ánh nắng ban mai,
+Gọi anh thức dậy sau đêm dài dài.
+Nụ cười em, mắt em cài,
+Đủ làm anh quên ngày mai bộn bề.
+Dù cho gió núi trăng khuya,
+Anh về có tiếng em kề bên tai.
+Yêu em chẳng tính đêm dài,
+Yêu em là cả tương lai của mình.`,
+    `Một ly cà phê buổi sớm,
+Một lời "anh nhớ" em nghe.
+Chuyện thường thôi mà thương lạ,
+Vì có em nên đời đẹp hơn.
+Anh không hứa điều to tát,
+Chỉ xin mỗi sáng có em,
+Cùng nhau già đi từng chút,
+Tay trong tay, mãi không rời.`,
+    `Thuyền anh neo bến vợ hiền,
+Sóng đời có dập vẫn yên một lòng.
+Em là gió mát đồng không,
+Là hương lúa chín, là dòng sông xanh.
+Mai này tóc bạc mong manh,
+Anh vẫn nhớ buổi ban đầu gặp em.`
   ];
 
   const anecdotes = [
@@ -228,7 +259,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Mỗi lần anh nói \"năm phút nữa là xong\" thì em biết ngay là phải chờ ít nhất nửa tiếng. 😅",
+    "Cuộc chiến không hồi kết giữa anh và em: ai là người giành chăn giỏi hơn lúc nửa đêm."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -252,6 +285,15 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     li.textContent = text;
     list.appendChild(li);
   });
+
+  const dayNum = Math.floor(Date.now() / 86400000);
+  document.getElementById('poem').innerHTML = '';
+  const poemText = document.createElement('span');
+  poemText.textContent = poems[dayNum % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  document.getElementById('poem').append(poemText, sig);
 
   document.getElementById('today').textContent = new Date().toLocaleDateString('vi-VN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
