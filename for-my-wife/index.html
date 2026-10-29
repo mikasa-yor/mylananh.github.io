@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,7 +213,35 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Trời cuối thu se lạnh, nhưng chỉ cần nghĩ đến em là lòng anh ấm như có nắng. Chào buổi sáng, vợ yêu!",
+    "Anh có thể quên mật khẩu, quên chìa khóa, quên cả mua sữa — nhưng không bao giờ quên yêu em.",
+    "Mỗi ngày bên em là một trang đẹp nhất trong cuốn sách đời anh. Hôm nay mình viết tiếp nhé?"
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Thu sang gió lạnh heo may,
+Anh mong có được đôi tay em cầm.
+Nụ cười em đẹp trăm năm,
+Làm anh quên cả những lần giận hờn.
+Dù cho sóng gió bão giông,
+Có em là bến, lòng không lo gì.
+Yêu em chẳng cần nghĩ suy,
+Mỗi ngày thêm một điều chi ngọt ngào.`,
+`Anh yêu em như biển yêu bờ,
+Sóng xô muôn lớp vẫn chờ vẫn mong.
+Như trăng yêu ánh sao đêm,
+Như hoa yêu nắng, như dòng yêu sông.
+Trọn đời anh chỉ một lòng,
+Sớm mai thức dậy vẫn mong thấy mình.`
   ];
 
   const anecdotes = [
@@ -228,7 +249,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Hai đứa cãi nhau xem ai đúng, cuối cùng quên mất cãi nhau chuyện gì và cùng bật cười.",
+    "Anh hứa chỉ ăn thử một miếng đồ ăn của em, rồi... hết sạch cả đĩa."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -252,6 +275,11 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     li.textContent = text;
     list.appendChild(li);
   });
+
+  const dayNum = Math.floor(Date.now() / 86400000);
+  document.getElementById('poem').innerHTML =
+    poems[dayNum % poems.length].replace(/&/g,'&amp;').replace(/</g,'&lt;') +
+    '<span class="signature">— anh viết riêng cho em</span>';
 
   document.getElementById('today').textContent = new Date().toLocaleDateString('vi-VN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
