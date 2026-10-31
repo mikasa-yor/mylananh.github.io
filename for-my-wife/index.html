@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,15 +213,76 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, bà xã xinh đẹp! Hôm nay nhớ ăn sáng nhé, vì anh cần vợ khỏe để còn yêu thương anh cả đời. 😘",
+    "Em ngủ dậy tóc rối như tổ chim mà anh vẫn thấy là cô gái đẹp nhất thế gian. Đó là tình yêu hay là mù quáng nhỉ? Chắc là cả hai. 😂",
+    "Hôm nay anh hứa sẽ không giành chăn của em… ít nhất là cho đến tối. 🛏️",
+    "Một ngày mới, một cơ hội mới để anh yêu em nhiều hơn hôm qua. Và ngày mai anh sẽ lại làm tốt hơn nữa.",
+    "Em là wifi của đời anh: không có em là anh mất kết nối với hạnh phúc. 📶💕",
+    "Anh không giàu có gì, nhưng anh có em — và thế là anh giàu nhất thế giới rồi.",
+    "Cảm ơn em đã chịu đựng tật xấu của anh, và vẫn cười mỗi sáng. Anh nợ em cả một đời yêu thương.",
+    "Nắng ngoài kia đẹp thật, nhưng chưa bằng nắng trong mắt em mỗi khi em cười với anh.",
+    "Chào em, người con gái làm trái tim anh đập nhanh hơn cả ly cà phê đậm nhất. ☕❤️",
+    "Hôm nay dù em có làm gì, nhớ rằng có một người luôn tự hào về em và luôn đứng về phía em.",
+    "Anh yêu em không phải vì em hoàn hảo, mà vì em là em — và với anh, thế là quá đủ.",
+    "Nếu được chọn lại hàng triệu lần, anh vẫn sẽ chọn em. Lần nào cũng vậy.",
+    "Morning, beautiful! Hôm nay anh sẽ rửa chén. (Hứa đấy… nếu em nhắc anh ba lần.) 🍽️",
+    "Mỗi nếp nhăn nụ cười sau này của em, anh đều muốn là người gây ra. Cười với anh nhiều nhé!",
+    "Anh nhớ em ngay cả khi em đang nằm cạnh anh. Chắc là bệnh nặng rồi — mà không muốn chữa. 💘",
+    "Em là bài hát anh nghe mãi không chán, là cuốn sách anh đọc hoài không hết trang.",
+    "Dậy đi em yêu, thế giới đang chờ em tỏa sáng — còn anh thì chờ được ôm em một cái thật chặt. 🤗",
+    "Hôm nay trời có mưa hay nắng cũng không sao, vì anh có em làm mặt trời riêng của anh. ☀️",
+    "Chúng mình có thể cãi nhau vì chuyện nhỏ xíu, nhưng chuyện yêu em thì anh chưa bao giờ phân vân.",
+    "Mỗi ngày bên em là một trang đẹp trong cuốn sách cuộc đời anh. Anh muốn viết mãi cùng em.",
+    "Cảm ơn vợ yêu vì đã là nhà của anh — nơi nào có em, nơi đó là nhà.",
+    "Anh yêu em đến tận mặt trăng… và quay về, mang theo em để cùng đi ăn phở. 🌙🍜",
+    "Em cứ là chính em, cứ mơ mộng, cứ nũng nịu — anh sẽ luôn ở đây, nắm tay em đi hết con đường.",
+    "Một ngày mới bắt đầu bằng tình yêu dành cho em. Anh yêu em, vợ ơi! 💖"
   ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Em là nắng sớm đầu ngày,
+Là hương cà phê, là tay anh cầm.
+Anh đi qua bao tháng năm,
+Gặp em mới thấy trăm năm có nhà.
+Dù mai tóc bạc da nhòa,
+Anh vẫn nhìn em như là ngày xưa.`,
+`Anh yêu em chẳng cần thơ,
+Chỉ cần em ở, bây giờ, mai sau.
+Một cơn gió thoảng qua mau,
+Là em, là cả một màu bình yên.
+Em cười, anh thấy thiên đường,
+Em buồn, anh nguyện làm đường che mưa.`,
+`Trời xanh mây trắng đong đưa,
+Không bằng ánh mắt em vừa nhìn anh.
+Yêu em chẳng cần nhiều lời,
+Chỉ xin được ở bên đời của nhau.
+Nắm tay nhau bước qua cầu,
+Dù đường gập ghềnh, tình đầu vẫn nguyên.`
+  ];
+
+  // Mỗi ngày một lời nhắn / một bài thơ mới (theo ngày trong năm)
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  document.getElementById('poem').innerHTML =
+    poems[dayOfYear % poems.length].replace(/</g, '&lt;') + '<span class="signature">— anh viết riêng cho em</span>';
 
   const anecdotes = [
     "Cái lần tụi mình đi lạc đường tìm quán ăn mà cuối cùng lại tìm được món ngon nhất từ trước giờ.",
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Anh nói \"năm phút nữa là xong\" — và em đã học được rằng 'năm phút' của anh nghĩa là nửa tiếng. 😅",
+    "Em hỏi \"anh có đói không?\", anh nói không, rồi ăn hết nửa phần của em. Vẫn được yêu như thường.",
+    "Những lần hai đứa cãi nhau xem ai là người chủ động làm hòa trước — và cả hai cùng cười ngay trong lúc cãi."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +291,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayOfYear % messages.length - 1;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[dayOfYear % messages.length];
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
