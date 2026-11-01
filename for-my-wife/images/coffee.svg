@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="#f3d9ff"/><g fill="#fff" stroke="#8a4b2d" stroke-width="6"><path d="M50 130h90v50a40 40 0 0 1-40 40h-10a40 40 0 0 1-40-40z"/><path d="M160 130h90v50a40 40 0 0 1-40 40h-10a40 40 0 0 1-40-40z"/></g>
+<path d="M140 150h-12a18 18 0 0 0 0 36h12M160 150h12a18 18 0 0 1 0 36h-12" fill="none" stroke="#8a4b2d" stroke-width="6" opacity="0"/>
+<rect x="55" y="135" width="80" height="20" fill="#6b3e26"/><rect x="165" y="135" width="80" height="20" fill="#6b3e26"/>
+<path d="M150 110c-14-20-36 0-16 16l16 14 16-14c20-16-2-36-16-16z" fill="#ff3d7f"/><path d="M95 100q-10-15 0-30M205 100q-10-15 0-30" stroke="#b78" stroke-width="5" fill="none" stroke-linecap="round"/>
+<text x="150" y="270" font-size="20" text-anchor="middle" font-family="sans-serif" fill="#4a2c3a">Cà phê sáng + em = ☀️</text></svg>

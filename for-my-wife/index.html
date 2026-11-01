@@ -139,6 +139,9 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  figure.photo{ margin:0; padding:0; aspect-ratio:auto; background:#fff; color:var(--text); border:1px solid #ffe0ea; overflow:hidden; display:block; }
+  figure.photo img{ width:100%; display:block; }
+  figure.photo figcaption{ font-size:12px; padding:8px; text-align:center; line-height:1.3; }
   footer{
     text-align:center;
     font-size: 13px;
@@ -164,14 +167,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -194,14 +190,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
   <section class="card">
     <h2>📸 Ảnh của tụi mình</h2>
     <div class="gallery">
-      <div class="photo romantic1">🌇<span class="cap">Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn</span></div>
-      <div class="photo funny1">🍜<span class="cap">Lần anh làm cháy nồi phở đầu tiên</span></div>
-      <div class="photo romantic2">💑<span class="cap">Tấm hình đôi lúc nào cũng thích</span></div>
-      <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
-      <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
-      <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <figure class="photo"><img src="images/sunset.svg" alt="Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn 🌇" loading="lazy"><figcaption>Hoàng hôn hôm đó đẹp, nhưng em đẹp hơn 🌇</figcaption></figure>
+      <figure class="photo"><img src="images/pho.svg" alt="Lần anh làm cháy nồi phở đầu tiên 🍜" loading="lazy"><figcaption>Lần anh làm cháy nồi phở đầu tiên 🍜</figcaption></figure>
+      <figure class="photo"><img src="images/coffee.svg" alt="Sáng nào cũng muốn uống cà phê cùng em ☕" loading="lazy"><figcaption>Sáng nào cũng muốn uống cà phê cùng em ☕</figcaption></figure>
+      <figure class="photo"><img src="images/boo.svg" alt="Mặt em lúc bị anh hù 😂" loading="lazy"><figcaption>Mặt em lúc bị anh hù 😂</figcaption></figure>
+      <figure class="photo"><img src="images/movie.svg" alt="Em ngủ gục giữa phim mình chờ cả tháng 🎬" loading="lazy"><figcaption>Em ngủ gục giữa phim mình chờ cả tháng 🎬</figcaption></figure>
+      <figure class="photo"><img src="images/dog.svg" alt="Cả hai bị con cún hàng xóm rượt 🐶" loading="lazy"><figcaption>Cả hai bị con cún hàng xóm rượt 🐶</figcaption></figure>
     </div>
-    <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
+    <p class="edit-note">📷 Muốn dùng ảnh thật? Thả ảnh vào <code>for-my-wife/images/</code> rồi đổi tên file trong thẻ <code>&lt;img&gt;</code>.</p>
   </section>
 
   <footer>
@@ -220,15 +216,63 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Anh có thể quên mật khẩu, quên chìa khóa, quên cả tên quán cà phê — nhưng chưa bao giờ quên yêu em.",
+    "Wifi có thể yếu, pin có thể hết, nhưng tín hiệu yêu em của anh thì luôn đầy vạch.",
+    "Chúc vợ yêu một ngày thật nhẹ nhàng. Nếu có ai làm em bực, cứ nhớ là có anh — đồng minh số một của em."
   ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Anh yêu em như sông yêu biển,
+Chảy muôn đời chẳng ngại đường xa.
+Anh yêu em như trăng yêu đêm,
+Lặng thầm soi sáng giấc mơ nhà mình.`,
+`Em cười, nắng rót vào anh,
+Em buồn, trời cũng nhạt xanh nửa vời.
+Xin em đừng bỏ nụ cười,
+Để anh còn có lý do yêu đời.`,
+`Có những điều chẳng cần nói,
+Chỉ cần tay nắm tay thôi cũng đầy.
+Cảm ơn em đã ở đây,
+Biến ngày thường thành những ngày thật vui.`,
+`Cơm canh đạm bạc cũng ngon,
+Có em ngồi đối diện còn hơn tiệc nhà.
+Đời anh chẳng cần xa hoa,
+Chỉ cần mái ấm có em là đầy.`,
+`Mai kia tóc bạc da nhăn,
+Anh vẫn nhìn em như thuở ban đầu.
+Tình mình chẳng sợ thời gian,
+Càng lâu càng đậm, càng sâu càng bền.`,
+`Anh xin hứa một điều thôi,
+Mỗi sáng thức dậy vẫn tôi — yêu nàng.
+Dẫu đời lắm nỗi gian nan,
+Có nàng bên cạnh, bình an cả đời.`
+  ];
+
+  // Mỗi ngày một bài thơ và một lời chúc khác nhau
+  const dayNum = Math.floor((new Date() - new Date(new Date().getFullYear(),0,0)) / 864e5);
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNum % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature'; sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
 
   const anecdotes = [
     "Cái lần tụi mình đi lạc đường tìm quán ăn mà cuối cùng lại tìm được món ngon nhất từ trước giờ.",
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Anh bảo \"năm phút nữa là xong\" — và em đã học được rằng năm phút của anh dài đúng một tiếng.",
+    "Mỗi lần em bảo \"em không đói\" rồi ăn hết nửa đĩa của anh, anh vẫn thấy đó là điều đáng yêu nhất."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -237,14 +281,15 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayNum % messages.length - 1;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  document.getElementById('daily-message').textContent = messages[dayNum % messages.length];
+  lastIndex = dayNum % messages.length;
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
