@@ -52,7 +52,7 @@
     text-align:center;
     padding: 4px 0;
   }
-  #shuffle{
+  #shuffle, #next-poem{
     display:block;
     margin: 16px auto 0;
     background: var(--pink);
@@ -64,7 +64,7 @@
     cursor:pointer;
     transition: transform .15s ease, background .15s ease;
   }
-  #shuffle:hover{ background: var(--pink-dark); transform: translateY(-1px); }
+  #shuffle:hover, #next-poem:hover{ background: var(--pink-dark); transform: translateY(-1px); }
   .poem{
     line-height: 2;
     font-size: 18px;
@@ -164,14 +164,8 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
+    <button id="next-poem">Đọc bài thơ khác 📜</button>
   </section>
 
   <section class="card">
@@ -220,7 +214,51 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, bà xã! Hôm nay em cứ việc toả sáng, còn anh xin phụ trách… đứng nhìn và tự hào.",
+    "Wifi có thể yếu, pin có thể hết, nhưng tín hiệu yêu em của anh thì luôn đầy vạch.",
+    "Anh không giỏi nói lời hoa mỹ, nhưng anh giỏi yêu em — và anh sẽ luyện tập mỗi ngày.",
+    "Hôm nay nếu em thấy mệt, nhớ rằng có một người luôn đứng về phía em, vô điều kiện.",
+    "Em ơi, nếu yêu em là một môn thi, anh đã đạt điểm tuyệt đối từ rất lâu rồi.",
+    "Mỗi nếp nhăn nụ cười của em sau này, anh đều muốn là người đã góp phần tạo ra.",
+    "Sáng nay trời đẹp, nhưng anh biết lý do thật sự: vì hôm nay lại là một ngày có em.",
+    "Cảm ơn em vì đã chịu đựng thói quen kỳ quặc của anh. Anh hứa vẫn sẽ không sửa. 😄",
+    "Anh yêu em như yêu bữa sáng: không thể thiếu, và luôn làm anh có năng lượng cho cả ngày.",
+    "Dù em có nói gì hôm nay, đáp án của anh vẫn là: ‘Vâng ạ, vợ yêu!’ — vì anh yêu em.",
+    "Bình yên của anh không phải một nơi chốn, mà là một người. Và người đó là em.",
+    "Mỗi ngày bên em anh lại phát hiện thêm một lý do để yêu em. Danh sách này chưa bao giờ ngắn lại.",
+    "Hôm nay anh xin phép được thương em nhiều hơn hôm qua một chút. Ngày mai lại xin phép tiếp."
+  ];
+
+  const poems = [
+`Sáng nay nắng đậu bên thềm,
+Anh nhìn em ngủ, tim mềm như mây.
+Cà phê chưa kịp pha ngay,
+Mà nghe hạnh phúc đong đầy trong anh.`,
+`Yêu em chẳng cần nói nhiều,
+Một ly nước ấm, buổi chiều có nhau.
+Đời dài dẫu lắm khổ đau,
+Có em, anh thấy nhiệm màu mỗi ngày.`,
+`Em là cơn gió đầu mùa,
+Thổi vào đời anh những trưa nắng hồng.
+Dù cho trời đất mênh mông,
+Anh chỉ cần một vòng tay của em.`,
+`Đêm qua em cuộn hết chăn,
+Anh run như cá, vẫn rằng yêu em.
+Sáng ra em dụi mắt xem,
+Thấy anh tím tái, em thèm cười ngay. 😄`,
+`Mai sau tóc bạc răng long,
+Tay anh vẫn nắm tay hồng của em.
+Dẫu anh quên cả tuổi tên,
+Nhưng không quên được em bên cạnh mình.`,
+`Cảm ơn em đã bước vào,
+Căn nhà nhỏ bỗng ngọt ngào hơn xưa.
+Nồi cơm, tiếng nói, cơn mưa,
+Cũng thành bản nhạc đong đưa trong lòng.`,
+`Thương em chẳng cần ngàn lời,
+Mỗi sáng anh thấy nụ cười là vui.
+Dù đời có lúc ngậm ngùi,
+Có em là cả đất trời của anh.`
   ];
 
   const anecdotes = [
@@ -228,8 +266,13 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Cái lần hai đứa cãi nhau xem ai đúng, rồi quên mất mình cãi vì chuyện gì và cùng bật cười.",
+    "Mỗi lần em nói ‘anh tự quyết định đi’ — anh biết đó là câu hỏi mẹo khó nhất thế giới.",
+    "Em hay giành chăn lúc nửa đêm, còn anh hay giả vờ ngủ say để em đắp thêm cho anh một góc nhỏ."
   ];
+
+  const dayNumber = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
 
   function pickRandom(arr, excludeIndex){
     let i;
@@ -237,21 +280,38 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  let lastIndex = dayNumber % messages.length;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
-
-  document.getElementById('shuffle').addEventListener('click', showMessage);
+  document.getElementById('shuffle').addEventListener('click', () => {
+    lastIndex = pickRandom(messages, lastIndex);
+    showMessage();
+  });
   showMessage();
 
-  const list = document.getElementById('anecdotes');
-  anecdotes.forEach(text => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    list.appendChild(li);
+  let poemIndex = dayNumber % poems.length;
+  function showPoem(){
+    const el = document.getElementById('poem');
+    el.textContent = poems[poemIndex];
+    const sig = document.createElement('span');
+    sig.className = 'signature';
+    sig.textContent = '— anh viết riêng cho em';
+    el.appendChild(sig);
+  }
+  document.getElementById('next-poem').addEventListener('click', () => {
+    poemIndex = (poemIndex + 1) % poems.length;
+    showPoem();
   });
+  showPoem();
+
+  // 3 kỷ niệm mỗi ngày, xoay vòng theo ngày
+  const list = document.getElementById('anecdotes');
+  for (let k = 0; k < 3; k++) {
+    const li = document.createElement('li');
+    li.textContent = anecdotes[(dayNumber * 3 + k) % anecdotes.length];
+    list.appendChild(li);
+  }
 
   document.getElementById('today').textContent = new Date().toLocaleDateString('vi-VN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
