@@ -164,14 +164,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem"></div>
   </section>
 
   <section class="card">
@@ -220,7 +213,38 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng vợ yêu! Hôm nay anh hứa sẽ không giành chăn của em… được ít nhất là đến tối. 😄",
+    "Em là người duy nhất anh sẵn lòng nhường miếng ngon nhất — kể cả miếng cuối cùng trong đĩa.",
+    "Báo cáo: nhớ em đã vượt chỉ tiêu từ lúc 6 giờ sáng. Yêu cầu em cười một cái để hạ nhiệt.",
+    "Mỗi nếp nhăn cười của em sau này, anh đều muốn là người gây ra. Yêu em nhiều lắm.",
+    "Cảm ơn em vì đã chịu đựng tiếng ngáy của anh và vẫn nói \"yêu anh\" mỗi sáng. Em là siêu anh hùng!",
+    "Thế giới rộng lớn, nhưng nhà của anh là nơi có em. Chúc em một ngày thật nhẹ nhàng nhé.",
+    "Hôm nay dù em có gặp chuyện gì, nhớ rằng có một người luôn đứng về phía em — là anh.",
+    "Anh yêu em như wifi yêu cái điện thoại: luôn muốn kết nối, và tuyệt đối không muốn mất tín hiệu. 📶💕"
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Anh yêu em chẳng ồn ào,
+Như trăng thầm lặng soi vào đêm sâu.
+Cà phê sáng có đắng đâu,
+Khi em ngồi đó mỉm cười với anh.
+Dẫu mai tóc bạc mong manh,
+Tay anh vẫn nắm tay em, ấm lành.`,
+`Sáng ra tóc rối như tơ,
+Mắt còn ngái ngủ, vẫn chờ anh ơi.
+Anh pha ly sữa nóng rồi,
+Em uống một ngụm, anh cười thật tươi.
+Hạnh phúc là những nụ cười,
+Giản đơn như thế, trọn đời bên nhau.`
   ];
 
   const anecdotes = [
@@ -237,9 +261,21 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Rotate by calendar day so every morning is different (local time)
+  const now = new Date();
+  const dayNumber = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+  const poemEl = document.getElementById('poem');
+  poemEl.textContent = poems[dayNumber % poems.length];
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
+
+  let lastIndex = dayNumber % messages.length;
+  let firstShow = true;
   function showMessage(){
-    lastIndex = pickRandom(messages, lastIndex);
+    if (firstShow) { firstShow = false; }
+    else { lastIndex = pickRandom(messages, lastIndex); }
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
