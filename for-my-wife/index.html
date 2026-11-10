@@ -220,7 +220,14 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Chào buổi sáng, bà xã! Hôm nay anh hứa sẽ không giành chăn... ít nhất là đến tối. Yêu em nhiều lắm.",
+    "Ngày mới bắt đầu bằng một điều giản dị: anh biết có em ở đó. Vậy là đủ để anh thấy mình may mắn nhất đời.",
+    "Em có biết vì sao anh dậy sớm không? Để được nhắn cho em câu này trước cả thế giới: anh yêu em.",
+    "Pin điện thoại anh có thể hết, nhưng tình yêu anh dành cho em thì không bao giờ cần sạc.",
+    "Mỗi nếp nhăn sau này của tụi mình đều là một nụ cười đã cùng nhau chia sẻ. Anh mong có thật nhiều nếp nhăn như vậy.",
+    "Hôm nay dù trời mưa hay nắng, anh vẫn có mặt trời riêng của mình — đó là em.",
+    "Anh không hứa cuộc sống luôn dễ dàng, nhưng anh hứa em sẽ không bao giờ phải đi một mình."
   ];
 
   const anecdotes = [
@@ -237,14 +244,20 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     return i;
   }
 
-  let lastIndex = -1;
+  // Mỗi ngày một lời chào khác nhau (theo ngày trong năm); nút bấm để đổi ngẫu nhiên.
+  const now = new Date();
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  let lastIndex = (dayOfYear % messages.length) - 1;
+  if (lastIndex < 0) lastIndex = messages.length - 1;
   function showMessage(){
     lastIndex = pickRandom(messages, lastIndex);
     document.getElementById('daily-message').textContent = messages[lastIndex];
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+  // Lần đầu mở trang: hiện lời chào của hôm nay.
+  document.getElementById('daily-message').textContent = messages[dayOfYear % messages.length];
+  lastIndex = dayOfYear % messages.length;
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
