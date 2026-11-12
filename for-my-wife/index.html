@@ -65,6 +65,19 @@
     transition: transform .15s ease, background .15s ease;
   }
   #shuffle:hover{ background: var(--pink-dark); transform: translateY(-1px); }
+  #shuffle-poem{
+    display:block;
+    margin: 16px auto 0;
+    background: var(--gold);
+    color:#fff;
+    border:none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size:14px;
+    cursor:pointer;
+    transition: transform .15s ease, background .15s ease;
+  }
+  #shuffle-poem:hover{ background: var(--pink-dark); transform: translateY(-1px); }
   .poem{
     line-height: 2;
     font-size: 18px;
@@ -139,6 +152,10 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  .photo.romantic4{ background: linear-gradient(135deg, #667eea, #764ba2); }
+  .photo.funny4{ background: linear-gradient(135deg, #fddb92, #d1fdff); color:#2b3a55; }
+  .photo.romantic5{ background: linear-gradient(135deg, #ff6a88, #ff99ac); }
+  .photo.funny5{ background: linear-gradient(135deg, #c9ffbf, #ffafbd); color:#2b3a55; }
   footer{
     text-align:center;
     font-size: 13px;
@@ -164,14 +181,8 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="daily-poem"></div>
+    <button id="shuffle-poem">Đổi bài thơ khác 🔄</button>
   </section>
 
   <section class="card">
@@ -188,6 +199,9 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <li>Anh hứa sẽ già đi cùng em, tóc bạc, chân chậm nhưng tay vẫn nắm nhau.</li>
       <li>Anh hứa sẽ luôn coi em là ưu tiên, không phải vì nghĩa vụ, mà vì anh muốn vậy.</li>
       <li>Anh hứa yêu em không chỉ hôm nay, mà là mãi mãi — forever and always.</li>
+      <li>Anh hứa sẽ luôn lắng nghe, dù đôi khi câu chuyện em kể chẳng có "điểm chính" gì cả.</li>
+      <li>Anh hứa dù mai sau cuộc sống đổi thay, tình anh dành cho em sẽ không bao giờ cũ đi.</li>
+      <li>Anh hứa mỗi sáng mở trang này ra, em sẽ luôn thấy có thêm một điều mới anh muốn nói với em.</li>
     </ul>
   </section>
 
@@ -200,6 +214,10 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
       <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
       <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <div class="photo romantic4">🌃<span class="cap">Đêm đó tụi mình ngồi ngắm sao, chẳng nói gì nhưng đủ ấm</span></div>
+      <div class="photo funny4">🧦<span class="cap">Cuộc chiến giành chăn mỗi tối — không ai thắng, không ai thua</span></div>
+      <div class="photo romantic5">🎂<span class="cap">Sinh nhật năm đó anh giấu bánh sau lưng, em giả vờ không biết</span></div>
+      <div class="photo funny5">🙃<span class="cap">Lần anh đi giày lộn chân mà đi cả buổi sáng không ai phát hiện</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
@@ -220,7 +238,46 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Anh chẳng cần gì to tát, chỉ cần mỗi sáng mở mắt ra đã thấy em là đủ.",
+    "Em là bình minh đẹp nhất mà anh được thấy mỗi ngày, dù trời có mưa hay nắng.",
+    "Cảm ơn em vì đã kiên nhẫn với một người đôi lúc vô tâm như anh — anh sẽ cố gắng tốt hơn mỗi ngày, vì em.",
+    "Hôm nay cũng như mọi hôm: anh thức dậy, nghĩ đến em, và biết mình là người may mắn nhất trên đời."
+  ];
+
+  const poems = [
+`Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+`Mắt em sáng hơn ánh trăng,
+Nụ cười ấm hơn muôn tầng nắng mai.
+Tay anh nắm chặt tay ai,
+Dẫu đường có dài cũng chẳng ngại chi.
+Yêu em từ phút sơ khi,
+Đến giờ vẫn vậy, chẳng hề đổi thay.
+Ngày mai, ngày sau, hôm nay,
+Bên em anh nguyện không rời nửa giây.`,
+`Có người sáng dậy lo âu,
+Riêng anh sáng dậy chỉ cầu có em.
+Cuộc đời bao nỗi éo le,
+Có em anh thấy nhẹ nhàng hơn nhiều.
+Thương em từ sáng đến chiều,
+Từ chiều đến tối, bao nhiêu cũng vừa.
+Mai này dù nắng hay mưa,
+Tay anh vẫn nắm, chẳng chừa một ai.`,
+`Gặp em là một chữ duyên,
+Giữ em lại là một đời anh nguyện.
+Dẫu cho sóng gió, biến thiên,
+Tay anh không buông, lòng nguyện không rời.
+Yêu em chẳng phải một lời,
+Mà là mỗi sáng, mỗi đời có nhau.
+Bạc đầu rồi vẫn gọi nhau,
+"Vợ ơi" hai tiếng ngọt ngào trăm năm.`
   ];
 
   const anecdotes = [
@@ -228,7 +285,11 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần tụi mình cãi nhau vì ai đúng đường, cuối cùng hóa ra cả hai đều sai và phải hỏi một ông chạy xe ba gác.",
+    "Em cười sặc nước khi anh kể cái chuyện 'siêu nhảm' mà giờ nhắc lại tụi mình vẫn cười muốn rụng hàm.",
+    "Lần chụp hình kỷ niệm mà cả hai đều nhắm mắt — giờ vẫn để làm hình đại diện vì nó quá thật.",
+    "Lần em nấu canh chua mặn gấp ba lần bình thường mà anh vẫn ăn hết hai tô, xong khen 'ngon lạ miệng'."
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -245,6 +306,20 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
   showMessage();
+
+  let lastPoemIndex = -1;
+  function showPoem(){
+    lastPoemIndex = pickRandom(poems, lastPoemIndex);
+    const poemEl = document.getElementById('daily-poem');
+    poemEl.textContent = poems[lastPoemIndex];
+    const sig = document.createElement('span');
+    sig.className = 'signature';
+    sig.textContent = '— anh viết riêng cho em';
+    poemEl.appendChild(sig);
+  }
+
+  document.getElementById('shuffle-poem').addEventListener('click', showPoem);
+  showPoem();
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
