@@ -139,6 +139,28 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  .photo.romantic4{ background: linear-gradient(135deg, #667eea, #764ba2); }
+  .photo.funny4{ background: linear-gradient(135deg, #ffecd2, #fcb69f); color:#2b3a55; }
+  .journal-entry{
+    border-left: 3px solid var(--pink);
+    padding: 6px 0 6px 14px;
+    margin-bottom: 16px;
+  }
+  .journal-entry:last-child{ margin-bottom: 0; }
+  .journal-entry .j-date{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    opacity: .6;
+    margin-bottom: 4px;
+  }
+  .journal-entry .j-poem{
+    white-space: pre-line;
+    font-family: 'Georgia', serif;
+    font-size: 15px;
+    opacity: .85;
+    margin: 6px 0;
+  }
   footer{
     text-align:center;
     font-size: 13px;
@@ -160,6 +182,12 @@
     <h2>🌅 Lời chào mỗi sáng</h2>
     <p id="daily-message"></p>
     <button id="shuffle">Đổi lời yêu thương khác 🔄</button>
+  </section>
+
+  <section class="card">
+    <h2>📅 Nhật ký mỗi ngày</h2>
+    <div id="journal"></div>
+    <p class="edit-note">🖋️ Mỗi ngày anh sẽ viết thêm một đoạn mới ở đây — chỗ lưu lại từng buổi sáng nghĩ về em.</p>
   </section>
 
   <section class="card">
@@ -200,6 +228,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
       <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
       <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <div class="photo romantic4">🌙<span class="cap">Đêm nào cũng muốn ngắm trăng cùng em</span></div>
+      <div class="photo funny4">🧦<span class="cap">Tìm hoài không thấy đôi vớ, hóa ra em "mượn" đi làm khăn lau mèo</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
@@ -222,6 +252,26 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
     "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
   ];
+
+  const journal = [
+    {
+      date: "13 tháng 11, 2026",
+      message: "Thêm một buổi sáng nữa anh được gọi em là vợ của anh — vẫn thấy may mắn như ngày đầu tiên.",
+      poem: "Sáng nay nắng nhẹ qua song,\nNhớ em như nhớ dòng sông chảy về.\nDẫu đời có lắm bộn bề,\nCó em là đủ, chẳng cần chi thêm.",
+      anecdote: "Lần tụi mình cãi nhau xem ai được chọn phim tối nay, cuối cùng cả hai ngủ quên trước khi phim chạy được nửa tiếng."
+    }
+  ];
+
+  const journalEl = document.getElementById('journal');
+  journal.slice().reverse().forEach(entry => {
+    const div = document.createElement('div');
+    div.className = 'journal-entry';
+    div.innerHTML = `<div class="j-date">${entry.date}</div>
+      <div>${entry.message}</div>
+      <div class="j-poem">${entry.poem}</div>
+      <div>😂 ${entry.anecdote}</div>`;
+    journalEl.appendChild(div);
+  });
 
   const anecdotes = [
     "Cái lần tụi mình đi lạc đường tìm quán ăn mà cuối cùng lại tìm được món ngon nhất từ trước giờ.",
