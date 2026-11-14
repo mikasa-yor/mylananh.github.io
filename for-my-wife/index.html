@@ -65,6 +65,19 @@
     transition: transform .15s ease, background .15s ease;
   }
   #shuffle:hover{ background: var(--pink-dark); transform: translateY(-1px); }
+  #shuffle-poem{
+    display:block;
+    margin: 18px auto 0;
+    background: var(--gold);
+    color:#fff;
+    border:none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size:14px;
+    cursor:pointer;
+    transition: transform .15s ease, background .15s ease;
+  }
+  #shuffle-poem:hover{ background: #e0893f; transform: translateY(-1px); }
   .poem{
     line-height: 2;
     font-size: 18px;
@@ -164,14 +177,8 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="daily-poem"></div>
+    <button id="shuffle-poem">Đổi bài thơ khác 🔄</button>
   </section>
 
   <section class="card">
@@ -228,7 +235,45 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần tụi mình giành cái remote đến cùng, cuối cùng hòa vì... tivi hết pin.",
+    "Em hát sai lời bài hát tủ của tụi mình cả năm trời mà anh chẳng dám sửa, chỉ sợ em giận rồi không hát nữa."
+  ];
+
+  const poems = [
+    {
+      lines: `Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.`,
+      sig: "— anh viết riêng cho em"
+    },
+    {
+      lines: `Yêu em từ phút ban đầu,
+Nụ cười em khiến lòng đau cũng tan.
+Dẫu đời có lắm gian nan,
+Tay anh vẫn nắm, không màng sớm trưa.
+Có em là có nắng mưa,
+Có em là có giấc mơ vẹn tròn.
+Anh xin giữ mãi lời son,
+Yêu em đến lúc không còn hơi thở.`,
+      sig: "— anh viết riêng cho em"
+    },
+    {
+      lines: `Mỗi ngày thức giấc bên em,
+Là ngày đẹp nhất anh thêm biết ơn.
+Dù cho sóng gió dập dồn,
+Có em, anh vẫn vững hơn bội phần.
+Tình mình như ánh trăng ngân,
+Sáng trong mà vẫn ân cần bên nhau.
+Ngày sau nếu có bạc đầu,
+Anh vẫn gọi em là câu chuyện tình.`,
+      sig: "— anh viết riêng cho em"
+    }
   ];
 
   function pickRandom(arr, excludeIndex){
@@ -245,6 +290,21 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
   showMessage();
+
+  let lastPoemIndex = -1;
+  function showPoem(){
+    lastPoemIndex = pickRandom(poems, lastPoemIndex);
+    const p = poems[lastPoemIndex];
+    const el = document.getElementById('daily-poem');
+    el.textContent = p.lines;
+    const sig = document.createElement('span');
+    sig.className = 'signature';
+    sig.textContent = p.sig;
+    el.appendChild(sig);
+  }
+
+  document.getElementById('shuffle-poem').addEventListener('click', showPoem);
+  showPoem();
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
