@@ -139,6 +139,8 @@
   .photo.funny2{ background: linear-gradient(135deg, #84fab0, #8fd3f4); color:#2b3a55; }
   .photo.romantic3{ background: linear-gradient(135deg, #d4a5ff, #ff9ecb); }
   .photo.funny3{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color:#2b3a55; }
+  .photo.romantic4{ background: linear-gradient(135deg, #667eea, #764ba2); }
+  .photo.funny4{ background: linear-gradient(135deg, #ffecd2, #fcb69f); color:#2b3a55; }
   footer{
     text-align:center;
     font-size: 13px;
@@ -164,14 +166,7 @@
 
   <section class="card">
     <h2>📜 Một bài thơ cho em</h2>
-    <div class="poem">Sáng nay mở mắt thấy em,
-Lòng anh ấm áp dịu êm nắng vàng.
-Đường đời có lắm mưa ngàn,
-Có em bên cạnh muôn ngàn cũng qua.
-Tình ta như khúc dân ca,
-Càng nghe càng thấm, càng xa càng gần.
-Trăm năm anh nguyện một lần,
-Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết riêng cho em</span></div>
+    <div class="poem" id="poem-text"></div>
   </section>
 
   <section class="card">
@@ -188,6 +183,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <li>Anh hứa sẽ già đi cùng em, tóc bạc, chân chậm nhưng tay vẫn nắm nhau.</li>
       <li>Anh hứa sẽ luôn coi em là ưu tiên, không phải vì nghĩa vụ, mà vì anh muốn vậy.</li>
       <li>Anh hứa yêu em không chỉ hôm nay, mà là mãi mãi — forever and always.</li>
+      <li>Anh hứa sẽ luôn lắng nghe em, kể cả khi anh không hiểu hết, anh vẫn sẽ cố gắng.</li>
+      <li>Anh hứa dù tụi mình có cãi nhau, cuối ngày anh vẫn sẽ là người quay lại ôm em trước.</li>
     </ul>
   </section>
 
@@ -200,6 +197,8 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
       <div class="photo funny2">😂<span class="cap">Mặt em lúc bị anh hù</span></div>
       <div class="photo romantic3">☕<span class="cap">Sáng nào cũng muốn uống cà phê cùng em</span></div>
       <div class="photo funny3">🐶<span class="cap">Cả hai đứa bị con cún nhà hàng xóm bắt nạt</span></div>
+      <div class="photo romantic4">🌙<span class="cap">Đêm tụi mình nằm đếm sao mà chẳng đếm nổi vì mắc cười quá</span></div>
+      <div class="photo funny4">🧦<span class="cap">Lần anh đi làm mà mang lộn hai chiếc vớ khác màu</span></div>
     </div>
     <p class="edit-note">📷 Thay các ô trên bằng ảnh thật: thêm file vào thư mục <code>for-my-wife/images/</code> rồi đổi mỗi <code>&lt;div class="photo"&gt;</code> thành <code>&lt;img src="images/ten-anh.jpg"&gt;</code>.</p>
   </section>
@@ -220,7 +219,11 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Em là món quà đẹp nhất mà anh từng nhận được — và anh sẽ trân trọng nó mỗi ngày.",
     "Dù cuộc sống có bận rộn thế nào, trái tim anh vẫn luôn dành một chỗ lớn nhất cho em.",
     "Good morning, my love. Cảm ơn em vì đã là chính mình — anh yêu tất cả những điều đó.",
-    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh."
+    "Nếu hạnh phúc có hình dạng, thì nó chính là em, ngay lúc này, trong vòng tay anh.",
+    "Mở mắt ra đã thấy may mắn vì bên anh vẫn luôn có em — anh chẳng mong gì hơn thế.",
+    "Em không cần hoàn hảo, vì với anh em đã là người hoàn hảo nhất rồi.",
+    "Cả thế giới có thể thay đổi, nhưng tình anh dành cho em thì mãi y nguyên như ngày đầu.",
+    "Chúc em một buổi sáng thật đẹp — đẹp như chính nụ cười em dành cho anh mỗi ngày."
   ];
 
   const anecdotes = [
@@ -228,13 +231,56 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     "Lần đầu tụi mình nấu ăn chung và suýt làm cháy cả bếp — nhưng vẫn ăn hết sạch vì đói quá.",
     "Em ngủ gục ngay giữa bộ phim mà tụi mình háo hức chờ xem cả tháng trời.",
     "Cuộc thi xem ai chịu lạnh giỏi hơn khi đi du lịch — và ai cũng thua thảm hại.",
-    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời."
+    "Lần anh hù em sợ muốn rớt tim, xong bị em đánh cho một trận nhớ đời.",
+    "Lần tụi mình cãi nhau vì chuyện xem phim gì, cuối cùng ai cũng ngủ quên trước khi phim hết.",
+    "Có lần em giận dỗi mà vẫn ngồi chờ anh ăn cơm, xong giả bộ no để khỏi làm hòa trước."
+  ];
+
+  const poems = [
+    { text: `Sáng nay mở mắt thấy em,
+Lòng anh ấm áp dịu êm nắng vàng.
+Đường đời có lắm mưa ngàn,
+Có em bên cạnh muôn ngàn cũng qua.
+Tình ta như khúc dân ca,
+Càng nghe càng thấm, càng xa càng gần.
+Trăm năm anh nguyện một lần,
+Mai sau bạc tóc vẫn cần có nhau.` },
+    { text: `Em là nắng sớm ban mai,
+Là ly cà phê ấm trên tay mỗi ngày.
+Có em, lòng chẳng vơi đầy,
+Chỉ còn trọn vẹn những ngày bình yên.
+Dẫu đời có lắm ưu phiền,
+Nắm tay em vẫn vững liền bước đi.
+Yêu em chẳng tính xuân thì,
+Trăm năm cũng chỉ mong ghi một người.` },
+    { text: `Thương em từ những điều quên,
+Từ ly nước lọc để trên bàn mỗi chiều.
+Thương em cả lúc hay cau có kêu,
+Vì anh biết đó là yêu, là gần.
+Mai này nếu có phong trần,
+Có em làm chỗ dừng chân một đời.
+Lời yêu chẳng nói thành lời,
+Chỉ xin được mãi bên người anh thương.` },
+    { text: `Gửi em một sớm bình yên,
+Một tách trà ấm, một miền nắng thơm.
+Ngày dài có lúc chơi vơi,
+Nhớ còn có một người luôn đứng sau.
+Yêu em chẳng ngại dãi dầu,
+Chỉ mong tay nắm thật lâu, thật bền.
+Mai sau nếu có bạc đen,
+Tình mình vẫn giữ nguyên men thuở đầu.` }
   ];
 
   function pickRandom(arr, excludeIndex){
     let i;
     do { i = Math.floor(Math.random() * arr.length); } while (arr.length > 1 && i === excludeIndex);
     return i;
+  }
+
+  function dayOfYear(date){
+    const start = new Date(date.getFullYear(), 0, 0);
+    const diff = date - start;
+    return Math.floor(diff / 86400000);
   }
 
   let lastIndex = -1;
@@ -244,7 +290,19 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
   }
 
   document.getElementById('shuffle').addEventListener('click', showMessage);
-  showMessage();
+
+  const today = new Date();
+  const doy = dayOfYear(today);
+  lastIndex = doy % messages.length;
+  document.getElementById('daily-message').textContent = messages[lastIndex];
+
+  const poem = poems[doy % poems.length];
+  const poemEl = document.getElementById('poem-text');
+  poemEl.textContent = poem.text;
+  const sig = document.createElement('span');
+  sig.className = 'signature';
+  sig.textContent = '— anh viết riêng cho em';
+  poemEl.appendChild(sig);
 
   const list = document.getElementById('anecdotes');
   anecdotes.forEach(text => {
@@ -253,7 +311,7 @@ Mai sau bạc tóc vẫn cần có nhau.<span class="signature">— anh viết r
     list.appendChild(li);
   });
 
-  document.getElementById('today').textContent = new Date().toLocaleDateString('vi-VN', {
+  document.getElementById('today').textContent = today.toLocaleDateString('vi-VN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 </script>
